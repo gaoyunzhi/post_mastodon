@@ -68,8 +68,9 @@ async def getMediaIds(mastodon, channel, post):
 async def postImp(mastodon, channel, post, key):
     post_text = await getText(channel, post, key)
     media_ids = await getMediaIds(mastodon, channel, post)
-    result = mastodon.status_post(post_text, media_ids=media_ids)
-    print(result)
+    if media_ids:
+        time.sleep(5)
+    mastodon.status_post(post_text, media_ids=media_ids)
 
 def getPostFromPending(posts):
     posts = list(itertools.islice(posts, 100))
