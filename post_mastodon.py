@@ -5,9 +5,7 @@ import asyncio
 import plain_db
 import cached_url
 from telegram_util import isCN, isUrl, removeOldFiles
-from reddit_2_album import reddit
 from telepost import getPendingPosts, getPost, getImages, getRawText, exitTelethon
-from praw.models import InlineImage, InlineVideo
 from telegram_util import matchKey
 import copy
 import time
@@ -16,11 +14,14 @@ import random
 import itertools
 import export_to_telegraph
 from bs4 import BeautifulSoup
+from mastodon import Mastodon
 
-reddit.validate_on_submit = True
 existing = plain_db.load('existing')
 with open('db/setting') as f:
     setting = yaml.load(f, Loader=yaml.FullLoader)
+
+with open('credential') as f:
+    credential = yaml.load(f, Loader=yaml.FullLoader)
 
 Day = 24 * 60 * 60
 
