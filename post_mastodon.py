@@ -63,8 +63,7 @@ async def getMediaIds(mastodon, channel, post):
         fns = await getImages(channel, post.post_id, img_number)
         for fn in fns:
             media_ids.append(mastodon.media_post(fn)['id'])
-    print(media_ids)
-    return media_ids
+    return media_ids[:4]
 
 async def postImp(mastodon, channel, post, key):
     post_text = await getText(channel, post, key)
