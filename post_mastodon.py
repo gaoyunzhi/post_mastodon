@@ -109,6 +109,9 @@ async def runImp():
             existing.update(key, 1)
         except Exception as e:
             print('post_mastodon', key, e)
+            if matchKey(str(e), ['Text超过了 1000 字的限制']): 
+                existing.update(key, -1)
+                continue
             raise e
         return
 
