@@ -2,6 +2,7 @@ from post_mastodon import *
 
 def create_account_secrets():
     for user, user_setting in credential['mastodon_users'].items():
+        print('creating credential:', user)
         secret_file = 'db/%s_mastodon_secret' % user
         Mastodon.create_app(
             't',
@@ -22,5 +23,5 @@ def test():
     ...
 
 if __name__ == '__main__':
-    # create_account_secrets()
+    create_account_secrets()
     test()
