@@ -71,14 +71,16 @@ async def postImp(mastodon, channel, post, key):
     if not media_ids:
         mastodon.status_post(post_text, media_ids=media_ids)
         return
-    for sleep_time in range(3, 18, 5):
-        time.sleep(sleep_time)
+    time.sleep(5)
+    for sleep_time in range(10, 20, 5):
         try:
             mastodon.status_post(post_text, media_ids=media_ids)
             return
         except Exception as e:
             if not matchKey(str(e), ['不能附加还在处理中的文件']):
                 raise e
+        time.sleep(sleep_time)
+    mastodon.status_post(post_text, media_ids=media_ids)
 
 def getPostFromPending(posts):
     posts = list(itertools.islice(posts, 100))
