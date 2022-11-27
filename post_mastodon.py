@@ -80,7 +80,10 @@ async def postImp(mastodon, channel, post, key):
             if not matchKey(str(e), ['不能附加还在处理中的文件']):
                 raise e
         time.sleep(sleep_time)
-    try:mastodon.status_post(post_text, media_ids=media_ids)
+    try:
+        mastodon.status_post(post_text, media_ids=media_ids)
+    except Exception as e:
+        print('post_mastodon fail', key, str(e))
 
 def getPostFromPending(posts):
     posts = list(itertools.islice(posts, 100))
