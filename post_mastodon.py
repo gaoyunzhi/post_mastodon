@@ -72,7 +72,7 @@ async def postImp(mastodon, channel, post, key):
         mastodon.status_post(post_text, media_ids=media_ids)
         return
     time.sleep(5)
-    for sleep_time in [10, 15]:
+    for sleep_time in [10, 20, 40]:
         try:
             mastodon.status_post(post_text, media_ids=media_ids)
             return
