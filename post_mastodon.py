@@ -77,6 +77,9 @@ async def postImp(mastodon, channel, post, key):
             mastodon.status_post(post_text, media_ids=media_ids)
             return
         except Exception as e:
+            if matchKey(str(e), ['无法在嘟文中同时插入视频和图片']):
+                media_ids = media_ids[:1]
+                continue
             if not matchKey(str(e), ['不能附加还在处理中的文件']):
                 raise e
         time.sleep(sleep_time)
